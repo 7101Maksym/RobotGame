@@ -2,40 +2,24 @@ using UnityEngine;
 
 public class DamagedScript : MonoBehaviour
 {
-    [SerializeField] private Sprite _damaged_1;
-    [SerializeField] private Sprite _damaged_2;
-    [SerializeField] private Sprite _damaged_3;
-    [SerializeField] private Sprite _damaged_4;
-    [SerializeField] private Sprite _damaged_5;
-    [SerializeField] private Sprite _damaged_6;
-    private Sprite[] _textures = new Sprite[6];
-
-    private SpriteRenderer _damageLewel;
     private Animator _animator;
-    
-    public int _myHealths, _maxHealths;
+
+    public int myHealths, maxHealths;
 
     private void Awake()
     {
-        _damageLewel = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
-
-        _textures[0] = _damaged_6;
-        _textures[1] = _damaged_5;
-        _textures[2] = _damaged_4;
-        _textures[3] = _damaged_3;
-        _textures[4] = _damaged_2;
-        _textures[5] = _damaged_1;
     }
 
     private void Update()
     {
-        if (_myHealths != 0)
+        if (myHealths > 0)
         {
-            _damageLewel.sprite = _textures[(5 * _myHealths) / _maxHealths];
+            _animator.SetInteger("DestrLewel", ((5 * myHealths) / maxHealths) + 1);
         }
         else
         {
+            _animator.SetInteger("DestrLewel", 0);
             _animator.SetBool("IsDestroyed", true);
         }
     }
