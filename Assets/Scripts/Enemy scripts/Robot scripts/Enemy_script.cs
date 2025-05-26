@@ -6,17 +6,18 @@ using UnityEngine;
 public class Enemy_script : MonoBehaviour
 {
     private Rigidbody2D _rb;
+    private EdgeCollider2D _seeCollider;
 
-	private float _rotate, _rotateSpeed = 50;
+	private float _rotate, _rotateSpeed = 50, _plRotate;
     private bool _canSetRotate = true;
 
     [SerializeField] private int _speed;
 
     private Vector2 _directon;
 
-    [SerializeField] private Transform _playerTransform;
+    public Transform _playerTransform;
 
-    public bool _playerFinded = false;
+    public bool _playerFinded = false, _canSee;
     
 	IEnumerator SetNewRotate()
 	{
@@ -32,12 +33,38 @@ public class Enemy_script : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _seeCollider = GetComponentInChildren<EdgeCollider2D>();
 
         _rotate = UnityEngine.Random.Range(-180, 180);
     }
 
     private void FixedUpdate()
     {
+        if (_playerTransform.position.x > transform.position.x)
+        {
+            _plRotate = -Vector2.Angle(new Vector2(0, 1), new Vector2(_playerTransform.position.x - transform.position.x, _playerTransform.position.y - transform.position.y));
+        }
+        else
+        {
+            _plRotate = Vector2.Angle(new Vector2(0, 1), new Vector2(_playerTransform.position.x - transform.position.x, _playerTransform.position.y - transform.position.y));
+        }
+
+        if (_playerFinded)
+        {
+            _seeCollider.points = new Vector2[] { transform.position, _playerTransform.position };
+
+            if (_canSee)
+            {
+                _rotate = _plRotate;
+            }
+        }
+        else
+        {
+            _canSee = false;
+
+            _seeCollider.points = new Vector2[] { new Vector2 (0, 0), new Vector2(0, 1) };
+        }
+
         if (_rotate - _rb.rotation > 1)
         {
             _rb.rotation += _rotateSpeed * Time.fixedDeltaTime;
@@ -50,13 +77,9 @@ public class Enemy_script : MonoBehaviour
         {
             _rb.rotation = _rotate;
 
-            if (_canSetRotate && !_playerFinded)
+            if (_canSetRotate && (!_playerFinded || !_canSee))
             {
                 StartCoroutine(SetNewRotate());
-            }
-            else if (_playerFinded)
-            {
-                
             }
 
             _directon = transform.up;
