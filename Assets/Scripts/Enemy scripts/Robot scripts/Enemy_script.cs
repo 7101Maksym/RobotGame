@@ -8,6 +8,10 @@ public class Enemy_script : MonoBehaviour
     private Rigidbody2D _rb;
     private EdgeCollider2D _seeCollider;
 
+    
+
+    private Shoot _shootingScript;
+
 	private float _rotate, _rotateSpeed = 50, _plRotate;
     private bool _canSetRotate = true;
 
@@ -34,6 +38,7 @@ public class Enemy_script : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _seeCollider = GetComponentInChildren<EdgeCollider2D>();
+        _shootingScript = GetComponentInChildren<Shoot>();
 
         _rotate = UnityEngine.Random.Range(-180, 180);
     }
@@ -80,6 +85,11 @@ public class Enemy_script : MonoBehaviour
             if (_canSetRotate && (!_playerFinded || !_canSee))
             {
                 StartCoroutine(SetNewRotate());
+            }
+
+            if (_playerFinded && _canSee)
+            {
+                _shootingScript.Shooting();
             }
 
             _directon = transform.up;

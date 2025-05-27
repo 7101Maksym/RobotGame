@@ -5,7 +5,7 @@ public class Enemy_generator : MonoBehaviour
 {
 	[SerializeField] private GameObject _enemy;
 	[SerializeField] private Transform _enemyCapacitor;
-
+ 
 	private bool _canAdd = true;
 
 	IEnumerator AddEnemy()
