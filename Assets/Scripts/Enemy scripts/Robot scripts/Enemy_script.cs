@@ -8,8 +8,6 @@ public class Enemy_script : MonoBehaviour
     private Rigidbody2D _rb;
     private EdgeCollider2D _seeCollider;
 
-    
-
     private Shoot _shootingScript;
 
 	private float _rotate, _rotateSpeed = 50, _plRotate;
@@ -21,7 +19,7 @@ public class Enemy_script : MonoBehaviour
 
     public Transform _playerTransform;
 
-    public bool _playerFinded = false, _canSee;
+    public bool _playerFinded = false, _canSee = true;
     
 	IEnumerator SetNewRotate()
 	{

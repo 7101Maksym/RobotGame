@@ -21,7 +21,7 @@ public class Enemy_generator : MonoBehaviour
 
     private void Update()
     {
-        if (_canAdd && _enemyCapacitor.transform.childCount < 20)
+        if (_canAdd && _enemyCapacitor.transform.childCount < 1)
         {
             _canAdd = false;
 

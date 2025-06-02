@@ -1,12 +1,13 @@
 using System.Collections;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
-	[SerializeField] private GameObject _bullet;
+	[SerializeField] private Autocannonbullet _bullet;
 	[SerializeField] private Transform _firstCoords, _secondCoords;
-	[SerializeField] private Transform _bulletCapacitor;
-
+	
+	private Transform _capacitor;
 	private Animator _animator;
 
 	private bool _canShoot = true;
@@ -14,6 +15,7 @@ public class Shoot : MonoBehaviour
     private void Awake()
     {
 		_animator = GetComponent<Animator>();
+		_capacitor = GameObject.Find("Capacitor").transform;
     }
 
     IEnumerator Reload()
@@ -25,31 +27,41 @@ public class Shoot : MonoBehaviour
 		_canShoot = true;
 	}
 
-	IEnumerator SelectPosition()
+	IEnumerator SelectPosition1()
 	{
 		_animator.SetBool("Shoot", true);
 
 		yield return new WaitForSeconds(0.2f);
 
-		_bullet.transform.position = _firstCoords.position;
+		Instantiate(_bullet, _capacitor);
 
-		Instantiate(_bullet, _bulletCapacitor);
-        
-		yield return new WaitForSeconds(0.1f);
+		_bullet.transform.position = new Vector2(_firstCoords.position.x, _firstCoords.position.y);
 
-        _bullet.transform.position = _secondCoords.position;
+		_bullet.gameObject.transform.rotation = transform.rotation;
 
-        Instantiate(_bullet, _bulletCapacitor);
+		StartCoroutine(SelectPosition2());
     }
 
-	public void Shooting()
+    IEnumerator SelectPosition2()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        Instantiate(_bullet, _capacitor);
+
+        _bullet.transform.position = new Vector2(_secondCoords.position.x, _secondCoords.position.y);
+
+        _bullet.gameObject.transform.rotation = transform.rotation;
+
+        StartCoroutine(Reload());
+    }
+
+    public void Shooting()
 	{
 		if (_canShoot)
 		{
 			_canShoot = false;
 
-			StartCoroutine(SelectPosition());
-            StartCoroutine(Reload());
+			StartCoroutine(SelectPosition1());
 		}
 	}
 }
