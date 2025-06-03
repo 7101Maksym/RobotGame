@@ -28,9 +28,14 @@ public class Autocannonbullet : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponentInChildren<Animator>();
 
-        //_rb.AddRelativeForce(transform.up * 1000);
+        _rb.AddForce(_rb.transform.up * 1000);
 
         StartCoroutine(Explosion());
+    }
+
+    private void Update()
+    {
+        Debug.DrawRay(transform.position, _rb.transform.up, Color.red);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

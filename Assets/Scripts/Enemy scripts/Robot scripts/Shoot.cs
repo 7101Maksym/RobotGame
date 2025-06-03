@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
-	[SerializeField] private Autocannonbullet _bullet;
-	[SerializeField] private Transform _firstCoords, _secondCoords;
+	[SerializeField] private Autocannonbullet _bullet, _bullet2;
+	[SerializeField] private Transform _firstCoords;
+	[SerializeField] private Transform _secondCoords;
+
+	private Vector2 _f, _s;
 	
 	private Transform _capacitor;
 	private Animator _animator;
@@ -20,8 +23,6 @@ public class Shoot : MonoBehaviour
 
     IEnumerator Reload()
 	{
-		_animator.SetBool("Shoot", false);
-
 		yield return new WaitForSeconds(2);
 
 		_canShoot = true;
@@ -29,16 +30,14 @@ public class Shoot : MonoBehaviour
 
 	IEnumerator SelectPosition1()
 	{
-		_animator.SetBool("Shoot", true);
-
 		yield return new WaitForSeconds(0.2f);
 
 		Instantiate(_bullet, _capacitor);
 
-		_bullet.transform.position = new Vector2(_firstCoords.position.x, _firstCoords.position.y);
+		_bullet.transform.position = new Vector2(_f.x, _f.y);
 
 		_bullet.gameObject.transform.rotation = transform.rotation;
-
+		
 		StartCoroutine(SelectPosition2());
     }
 
@@ -46,13 +45,15 @@ public class Shoot : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
 
-        Instantiate(_bullet, _capacitor);
+        Instantiate(_bullet2, _capacitor);
 
-        _bullet.transform.position = new Vector2(_secondCoords.position.x, _secondCoords.position.y);
+        _bullet2.transform.position = new Vector2(_s.x, _s.y);
 
-        _bullet.gameObject.transform.rotation = transform.rotation;
+		_bullet2.gameObject.transform.rotation = transform.rotation;
 
-        StartCoroutine(Reload());
+		_animator.SetBool("Shoot", false);
+
+		StartCoroutine(Reload());
     }
 
     public void Shooting()
@@ -61,7 +62,15 @@ public class Shoot : MonoBehaviour
 		{
 			_canShoot = false;
 
-			StartCoroutine(SelectPosition1());
+            _animator.SetBool("Shoot", true);
+
+            StartCoroutine(SelectPosition1());
 		}
 	}
+
+    private void Update()
+    {
+		_f = _firstCoords.position;
+		_s = _secondCoords.position;
+    }
 }
