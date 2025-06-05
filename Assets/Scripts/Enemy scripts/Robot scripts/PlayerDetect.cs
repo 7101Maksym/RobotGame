@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerDetect : MonoBehaviour
 {
-    /*[SerializeField] private Enemy_script _moveScript;
+    [SerializeField] private Enemy_script _moveScript;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -19,5 +19,5 @@ public class PlayerDetect : MonoBehaviour
         {
             _moveScript._playerFinded = false;
         }
-    }*/
+    }
 }

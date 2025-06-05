@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a58853d143d452439528d4808afdd5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveScript: {fileID: 7248386670124062371}
 --- !u!1 &678977210535162087
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2911941bb045ea54ea87f046443cb8c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveScript: {fileID: 7248386670124062371}
 --- !u!1 &1383037514300222734
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,7 +527,7 @@ Transform:
   m_GameObject: {fileID: 8254644397553329546}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 42, y: -32, z: 0}
+  m_LocalPosition: {x: 0, y: -26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -574,15 +576,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ef8c938a219e3489812bcb9e1cd950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _viewRadius: 5
-  _viewAngle: 90
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 8
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 128
-  target: {fileID: 2549269798754886262, guid: 1b199609a52fc104983628439fd312be, type: 3}
+  _speed: 2
+  _playerTransform: {fileID: 2549269798754886262, guid: 1b199609a52fc104983628439fd312be, type: 3}
+  _playerFinded: 0
+  _canSee: 1
 --- !u!1 &8671361064038748519
 GameObject:
   m_ObjectHideFlags: 0

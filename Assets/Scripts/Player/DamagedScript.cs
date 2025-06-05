@@ -8,7 +8,7 @@ public class DamagedScript : MonoBehaviour
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()

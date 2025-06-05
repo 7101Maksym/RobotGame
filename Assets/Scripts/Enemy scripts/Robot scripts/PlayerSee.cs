@@ -6,9 +6,13 @@ public class PlayerSee : MonoBehaviour
 
     private int _countObgects;
 
+    private void Awake()
+    {
+        _moveScript = GetComponentInParent<Enemy_script>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("E");
         if (!collision.gameObject.CompareTag("Player"))
         {
             _countObgects++;

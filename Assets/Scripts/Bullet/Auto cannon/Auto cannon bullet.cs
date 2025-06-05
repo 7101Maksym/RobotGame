@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Autocannonbullet : MonoBehaviour
 {
+    [SerializeField] private int _damage = 2;
+    [SerializeField] private int _speed = 500;
+
     public Rigidbody2D _rb;
     private Animator _animator;
 
     private IEnumerator Destr()
     {
+        _rb.AddForce(-_rb.transform.up * _speed);
+
         _animator.SetBool("IsDestroyed", true);
 
         yield return new WaitForSeconds(0.8f);
@@ -28,7 +33,7 @@ public class Autocannonbullet : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponentInChildren<Animator>();
 
-        _rb.AddForce(_rb.transform.up * 1000);
+        _rb.AddForce(_rb.transform.up * _speed);
 
         StartCoroutine(Explosion());
     }
@@ -42,6 +47,8 @@ public class Autocannonbullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            collision.gameObject.GetComponentInParent<DamagedScript>().myHealths -= _damage;
+
             StopCoroutine(Explosion());
 
             StartCoroutine(Destr());

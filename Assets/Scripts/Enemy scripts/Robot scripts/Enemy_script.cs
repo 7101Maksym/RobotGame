@@ -13,7 +13,7 @@ public class Enemy_script : MonoBehaviour
 	private float _rotate, _rotateSpeed = 50, _plRotate;
     private bool _canSetRotate = true;
 
-    [SerializeField] private int _speed;
+    [SerializeField] private int _speed = 4;
 
     private Vector2 _directon;
 
