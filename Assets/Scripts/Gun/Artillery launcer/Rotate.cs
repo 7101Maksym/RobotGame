@@ -1,34 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 public class Rotate : MonoBehaviour
 {
 	[SerializeField] private float _rotateSpeed = 50f;
 
-	[SerializeField] private Rigidbody2D _rb;
-
-	private float _rotateAngle;
+	public float Limit;
 
 	private int _direct;
+
+    private void Awake()
+    {
+		Limit = gameObject.GetComponentInParent<SelectGun>().Limit;
+    }
+
     private int GetRotateAngle()
 	{
-		Vector2 mouse = Input.mousePosition;
+		Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-		float controlAngle;
+        float controlAngle;
+		Debug.Log(transform.rotation.eulerAngles.z);
+        controlAngle = Vector2.Angle(transform.right.normalized, new Vector2(mouse.x - transform.position.x, mouse.y - transform.position.y).normalized);
 
-		_rotateAngle = Vector2.Angle(transform.up, new Vector2(transform.position.x - mouse.x, transform.position.y - mouse.y));
-		controlAngle = Vector2.Angle(transform.right, new Vector2(transform.position.x - mouse.x, transform.position.y - mouse.y));
-
-		if (controlAngle < 89)
-		{
-			return 1;
-		}
-		else if (controlAngle > 91)
+        if (controlAngle < 89 && transform.localRotation.eulerAngles.z - 1 >= 0)
 		{
 			return -1;
+		}
+		else if (controlAngle > 91 && transform.localRotation.eulerAngles.z + 1 <= Limit)
+		{
+			return 1;
 		}
 		else
 		{
@@ -39,7 +38,6 @@ public class Rotate : MonoBehaviour
     private void FixedUpdate()
     {
 		_direct = GetRotateAngle();
-		//_rotateSpeed * _direct * Time.fixedDeltaTime
-		_rb.rotation = _rotateAngle * _direct;
+		transform.Rotate(new Vector3(0, 0, _rotateSpeed * _direct * Time.fixedDeltaTime));
     }
 }

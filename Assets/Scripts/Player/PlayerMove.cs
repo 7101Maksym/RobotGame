@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
 	private PlayerInput _input;
-	private Rigidbody2D _rb;
+	public Rigidbody2D _rb;
 
     [SerializeField] private int _maxSpeed;
     [SerializeField] private int _rotateSpeed;

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6529919606824199299}
-  - component: {fileID: 8968551022878246019}
   - component: {fileID: 489686766928973655}
   m_Layer: 0
   m_Name: ArtileryLauncer
@@ -34,33 +33,6 @@ Transform:
   - {fileID: 8579789862273766001}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &8968551022878246019
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7310191877810184450}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &489686766928973655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5955f2d596225f459cc0e9b377236f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotateSpeed: 50
-  _rb: {fileID: 8968551022878246019}
+  _rotateSpeed: 75
+  Limit: 0
 --- !u!1 &7869326887558365641
 GameObject:
   m_ObjectHideFlags: 0

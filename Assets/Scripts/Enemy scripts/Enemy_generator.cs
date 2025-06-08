@@ -5,6 +5,7 @@ public class Enemy_generator : MonoBehaviour
 {
 	[SerializeField] private GameObject _enemy;
 	[SerializeField] private Transform _enemyCapacitor;
+    [SerializeField] private int _countEnemys = 20;
  
 	private bool _canAdd = true;
 
@@ -21,7 +22,7 @@ public class Enemy_generator : MonoBehaviour
 
     private void Update()
     {
-        if (_canAdd && _enemyCapacitor.transform.childCount < 20)
+        if (_canAdd && _enemyCapacitor.transform.childCount < _countEnemys)
         {
             _canAdd = false;
 
