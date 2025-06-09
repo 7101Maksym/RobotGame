@@ -331,6 +331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3558120866659786077}
   - component: {fileID: 2207865643429969044}
+  - component: {fileID: 7722865511933444804}
   m_Layer: 7
   m_Name: UpgradeCollider
   m_TagString: Untagged
@@ -350,7 +351,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1557493600902446232}
   m_Father: {fileID: 3980722125933274332}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2207865643429969044
@@ -398,6 +400,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2092905, y: 0.2002716}
   m_EdgeRadius: 0
+--- !u!114 &7722865511933444804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2752131919358119689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c4de6100a5e61f4aabb81e753cca9b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 5835941909840602546, guid: 1b199609a52fc104983628439fd312be, type: 3}
+  _positionNode: {fileID: 1557493600902446232}
 --- !u!1 &3185668167843832386
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,6 +446,37 @@ Transform:
   - {fileID: 7745273686859592550}
   - {fileID: 3558120866659786077}
   m_Father: {fileID: 2698425019672749142}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5589511708917022787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1557493600902446232}
+  m_Layer: 7
+  m_Name: PositionNode
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1557493600902446232
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5589511708917022787}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.6567, y: 0.6554, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3558120866659786077}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6786303720731936753
 GameObject:

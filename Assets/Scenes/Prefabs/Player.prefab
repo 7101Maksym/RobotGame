@@ -211,6 +211,7 @@ MonoBehaviour:
   _gun: {fileID: 7310191877810184450, guid: 73b3aa67e46a09243bbcc42c5cfdc6a9, type: 3}
   _image: {fileID: 1287868226601354401}
   Limit: 180
+  StartDirection: 135
 --- !u!1 &1635201042136596051
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,6 +306,7 @@ MonoBehaviour:
   _maxSpeed: 2
   _rotateSpeed: 50
   _factor: 0.02
+  CanMove: 1
 --- !u!114 &3185692418620906213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,6 +368,7 @@ MonoBehaviour:
   _gun: {fileID: 7310191877810184450, guid: 73b3aa67e46a09243bbcc42c5cfdc6a9, type: 3}
   _image: {fileID: 889427492516469426}
   Limit: 180
+  StartDirection: 225
 --- !u!1 &1950725470407320082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,6 +1053,7 @@ MonoBehaviour:
   _gun: {fileID: 7310191877810184450, guid: 73b3aa67e46a09243bbcc42c5cfdc6a9, type: 3}
   _image: {fileID: 5419832433404304500}
   Limit: 90
+  StartDirection: 135
 --- !u!1 &3724276536237006137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1097,6 +1101,7 @@ MonoBehaviour:
   _gun: {fileID: 7310191877810184450, guid: 73b3aa67e46a09243bbcc42c5cfdc6a9, type: 3}
   _image: {fileID: 1843901340209545918}
   Limit: 90
+  StartDirection: 135
 --- !u!1 &4260592026266181316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,6 +1149,7 @@ MonoBehaviour:
   _gun: {fileID: 7310191877810184450, guid: 73b3aa67e46a09243bbcc42c5cfdc6a9, type: 3}
   _image: {fileID: 7141393243053731008}
   Limit: 180
+  StartDirection: 225
 --- !u!1 &5070098212684521088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1587,6 +1593,7 @@ MonoBehaviour:
   _gun: {fileID: 7310191877810184450, guid: 73b3aa67e46a09243bbcc42c5cfdc6a9, type: 3}
   _image: {fileID: 3836882637766818780}
   Limit: 180
+  StartDirection: 135
 --- !u!1 &7461649864338162978
 GameObject:
   m_ObjectHideFlags: 0
@@ -1634,6 +1641,7 @@ MonoBehaviour:
   _gun: {fileID: 7310191877810184450, guid: 73b3aa67e46a09243bbcc42c5cfdc6a9, type: 3}
   _image: {fileID: 7012238149120588607}
   Limit: 90
+  StartDirection: 135
 --- !u!1 &7612290288043797275
 GameObject:
   m_ObjectHideFlags: 0
@@ -2028,3 +2036,4 @@ MonoBehaviour:
   _gun: {fileID: 7310191877810184450, guid: 73b3aa67e46a09243bbcc42c5cfdc6a9, type: 3}
   _image: {fileID: 8429476501110759200}
   Limit: 90
+  StartDirection: 135

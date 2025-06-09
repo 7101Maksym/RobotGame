@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
-	[SerializeField] private Autocannonbullet _bullet;
+	[SerializeField] private Bullet _bullet;
 	[SerializeField] private Transform _firstCoords;
 	[SerializeField] private Transform _secondCoords;
 
@@ -32,11 +32,11 @@ public class Shoot : MonoBehaviour
 	{
 		yield return new WaitForSeconds(0.2f);
 
-		Instantiate(_bullet, _capacitor);
-
 		_bullet.transform.position = new Vector2(_f.x, _f.y);
 
 		_bullet.gameObject.transform.rotation = transform.rotation;
+
+		Instantiate(_bullet, _capacitor);
 		
 		StartCoroutine(SelectPosition2());
     }
@@ -45,11 +45,11 @@ public class Shoot : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
 
-        Instantiate(_bullet, _capacitor);
-
-        _bullet.transform.position = new Vector2(_s.x, _s.y);
+		_bullet.transform.position = new Vector2(_s.x, _s.y);
 
 		_bullet.gameObject.transform.rotation = transform.rotation;
+
+        Instantiate(_bullet, _capacitor);
 
 		_animator.SetBool("Shoot", false);
 

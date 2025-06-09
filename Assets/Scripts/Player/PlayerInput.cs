@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    public float up_down { get; private set; }
-    public float left_right { get; private set; }
+    public float UpDown { get; private set; }
+    public float LeftRight { get; private set; }
+    public float Shoot { get; private set; }
 
     private void Update()
     {
-        up_down = Input.GetAxisRaw("Vertical");
-        left_right = Input.GetAxisRaw("Horizontal");
+        UpDown = Input.GetAxisRaw("Vertical");
+        LeftRight = Input.GetAxisRaw("Horizontal");
+        Shoot = Input.GetAxisRaw("Fire1");
     }
 }

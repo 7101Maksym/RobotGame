@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6529919606824199299}
   - component: {fileID: 489686766928973655}
+  - component: {fileID: 707281056525356832}
   m_Layer: 0
   m_Name: ArtileryLauncer
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7310191877810184450}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.38268346, w: 0.9238795}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -47,6 +48,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotateSpeed: 75
   Limit: 0
+--- !u!114 &707281056525356832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7310191877810184450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9527fbb00c8e72a49ab1a2b8db1cb7de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bullet: {fileID: 1947659942961402749, guid: 57414bfb3643c034c99143104b9e7e64, type: 3}
 --- !u!1 &7869326887558365641
 GameObject:
   m_ObjectHideFlags: 0

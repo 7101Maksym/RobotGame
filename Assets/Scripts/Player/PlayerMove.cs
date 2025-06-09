@@ -10,8 +10,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private int _rotateSpeed;
     [SerializeField] private float _factor;
 
+    public bool CanMove = true;
     private float _speed = 0;
-
 	private Vector2 _direction;
     private float _rotation;
 
@@ -23,11 +23,11 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        if (_input.up_down != 0)
+        if (_input.UpDown != 0)
         {
             if (Math.Abs(_speed) < _maxSpeed)
             {
-                _speed += _factor * _input.up_down;
+                _speed += _factor * _input.UpDown;
             }
         }
         else
@@ -43,12 +43,15 @@ public class PlayerMove : MonoBehaviour
         }
 
         _direction = transform.up;
-        _rotation = _input.left_right * _rotateSpeed;
+        _rotation = _input.LeftRight * _rotateSpeed;
     }
 
     private void FixedUpdate()
     {
-        _rb.MovePosition(_rb.position + _direction * _speed * Time.fixedDeltaTime);
-        _rb.rotation -= _rotation * Time.fixedDeltaTime;
+        if (CanMove)
+        {
+            _rb.MovePosition(_rb.position + _direction * _speed * Time.fixedDeltaTime);
+            _rb.rotation -= _rotation * Time.fixedDeltaTime;
+        }
     }
 }
