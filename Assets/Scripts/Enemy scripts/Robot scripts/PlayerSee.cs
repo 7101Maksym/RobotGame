@@ -1,35 +1,22 @@
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerSee : MonoBehaviour
 {
     [SerializeField] private Enemy_script _moveScript;
+    [SerializeField] private LayerMask _mask;
 
-    private int _countObgects;
+    private GameObject _player;
 
     private void Awake()
     {
-        _moveScript = GetComponentInParent<Enemy_script>();
+        _player = GameObject.Find("Player");
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void FixedUpdate()
     {
-        if (!collision.gameObject.CompareTag("Player"))
-        {
-            _countObgects++;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (!collision.gameObject.CompareTag("Player"))
-        {
-            _countObgects--;
-        }
-    }
-
-    private void Update()
-    {
-        if (_countObgects > 0)
+        if (Physics2D.Raycast(transform.position, _player.transform.position - transform.position, Vector2.Distance(_player.transform.position, transform.position), _mask))
         {
             _moveScript._canSee = false;
         }

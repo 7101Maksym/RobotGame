@@ -36,6 +36,8 @@ public class Shoot : MonoBehaviour
 
 		_bullet.gameObject.transform.rotation = transform.rotation;
 
+		_bullet.Self = gameObject;
+
 		Instantiate(_bullet, _capacitor);
 		
 		StartCoroutine(SelectPosition2());
@@ -48,6 +50,8 @@ public class Shoot : MonoBehaviour
 		_bullet.transform.position = new Vector2(_s.x, _s.y);
 
 		_bullet.gameObject.transform.rotation = transform.rotation;
+
+        _bullet.Self = gameObject;
 
         Instantiate(_bullet, _capacitor);
 

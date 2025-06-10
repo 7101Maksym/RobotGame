@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class SelectGun : MonoBehaviour
 {
-	[SerializeField] private GameObject _gun;
+	[SerializeField] public GameObject Gun;
     [SerializeField] private Image _image;
 
     [Range(0, 360)]
@@ -17,9 +13,9 @@ public class SelectGun : MonoBehaviour
 
     public void AddGun()
     {
-        _gun.transform.eulerAngles = new Vector3(0, 0, StartDirection - 90);
+        Gun.transform.eulerAngles = new Vector3(0, 0, StartDirection - 90);
 
-        Instantiate(_gun, gameObject.transform);
+        Instantiate(Gun, gameObject.transform);
 
         _image.gameObject.SetActive(false);
     }

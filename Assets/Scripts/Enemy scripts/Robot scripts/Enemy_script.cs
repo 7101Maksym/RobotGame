@@ -6,7 +6,6 @@ using UnityEngine;
 public class Enemy_script : MonoBehaviour
 {
     private Rigidbody2D _rb;
-    private EdgeCollider2D _seeCollider;
 
     private Shoot _shootingScript;
 
@@ -35,7 +34,6 @@ public class Enemy_script : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _seeCollider = GetComponentInChildren<EdgeCollider2D>();
         _shootingScript = GetComponentInChildren<Shoot>();
 
         _rotate = UnityEngine.Random.Range(-180, 180);
@@ -54,18 +52,10 @@ public class Enemy_script : MonoBehaviour
 
         if (_playerFinded)
         {
-            _seeCollider.points = new Vector2[] { transform.position, _playerTransform.position };
-
             if (_canSee)
             {
                 _rotate = _plRotate;
             }
-        }
-        else
-        {
-            _canSee = false;
-
-            _seeCollider.points = new Vector2[] { new Vector2 (0, 0), new Vector2(0, 1) };
         }
 
         if (_rotate - _rb.rotation > 1)

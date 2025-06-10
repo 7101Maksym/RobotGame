@@ -6,7 +6,7 @@ public class PlayerDetect : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Base"))
         {
             _moveScript._playerFinded = true;
             _moveScript._playerTransform = collision.GetComponentInParent<Rigidbody2D>().transform;
@@ -15,7 +15,7 @@ public class PlayerDetect : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Base"))
         {
             _moveScript._playerFinded = false;
         }
