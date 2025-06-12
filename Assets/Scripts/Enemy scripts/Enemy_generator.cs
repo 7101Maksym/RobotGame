@@ -15,7 +15,7 @@ public class Enemy_generator : MonoBehaviour
 
         Instantiate(_enemy, _enemyCapacitor);
 
-        _enemy.transform.position = new Vector2(UnityEngine.Random.Range(-70, 50), UnityEngine.Random.Range(-33, 30));
+        _enemy.transform.position = new Vector2(Random.Range(-70, 50), Random.Range(-33, 30));
 
 		_canAdd = true;
     }

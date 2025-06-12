@@ -4,7 +4,9 @@ public class DamagedScript : MonoBehaviour
 {
     private Animator _animator;
 
-    public int myHealths, maxHealths;
+    [SerializeField] private int _maxHealths;
+
+    public int myHealths;
 
     private void Awake()
     {
@@ -15,12 +17,28 @@ public class DamagedScript : MonoBehaviour
     {
         if (myHealths > 0)
         {
-            _animator.SetInteger("DestrLewel", ((5 * myHealths) / maxHealths) + 1);
+            _animator.SetInteger("DestrLewel", ((5 * myHealths) / _maxHealths) + 1);
         }
         else
         {
             _animator.SetInteger("DestrLewel", 0);
             _animator.SetBool("IsDestroyed", true);
+        }
+    }
+
+    public void RechargeHealths(int recharge)
+    {
+        if (myHealths == _maxHealths)
+        {
+            return;
+        }
+        else if (myHealths + recharge >= _maxHealths)
+        {
+            myHealths = _maxHealths;
+        }
+        else
+        {
+            myHealths += recharge;
         }
     }
 }

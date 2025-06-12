@@ -6,12 +6,10 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private int _damage = 2;
     [SerializeField] private int _speed = 500;
-    [SerializeField] private int[] _layers;
+    [SerializeField] private int[] _layers, _excludeLayers;
 
     public Rigidbody2D _rb;
-    public GameObject Self;
     private Animator _animator;
-    private bool _active = false;
 
     private IEnumerator Destr()
     {
@@ -29,13 +27,6 @@ public class Bullet : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         StartCoroutine(Destr());
-    }
-
-    private IEnumerator SetActive()
-    {
-        yield return new WaitForSeconds(0.02f);
-
-        _active = true;
     }
 
     private bool InArray(int[] arr, int a)
@@ -62,7 +53,6 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         StartCoroutine(Explosion());
-        StartCoroutine(SetActive());
     }
 
     private void Update()
@@ -72,12 +62,19 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.name);
-        if (_active)
+        if (!InArray(_excludeLayers, collision.gameObject.layer) && collision.isTrigger == false)
         {
             if (InArray(_layers, collision.gameObject.layer))
             {
-                collision.gameObject.GetComponentInParent<DamagedScript>().myHealths -= _damage;
+                if (collision.gameObject.GetComponentInParent<DamagedScript>())
+                {
+                    collision.gameObject.GetComponentInParent<DamagedScript>().myHealths -= _damage;
+                }
+                else if (collision.gameObject.GetComponentInParent<EnemyDamagedScript>())
+                {
+                    collision.gameObject.GetComponentInParent<EnemyDamagedScript>().myHealths -= _damage;
+                }
+
 
                 StopCoroutine(Explosion());
 

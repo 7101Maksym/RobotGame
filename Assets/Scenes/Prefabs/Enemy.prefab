@@ -382,6 +382,7 @@ GameObject:
   - component: {fileID: 3819827520848586481}
   - component: {fileID: 7248386670124062371}
   - component: {fileID: 602885738833208659}
+  - component: {fileID: 2380550107482425354}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -398,7 +399,7 @@ Transform:
   m_GameObject: {fileID: 8254644397553329546}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -33, y: 1, z: 0}
+  m_LocalPosition: {x: 28, y: 20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -448,9 +449,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2
+  _deathZone: 2
   _playerTransform: {fileID: 2549269798754886262, guid: 1b199609a52fc104983628439fd312be, type: 3}
   _playerFinded: 0
   _canSee: 1
+  SetDeathZone: 1
 --- !u!114 &602885738833208659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,6 +470,22 @@ MonoBehaviour:
   _mask:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &2380550107482425354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8254644397553329546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b275f132ffff0499e3a50c705c86f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealths: 20
+  _randParametrs: 50
+  _rechargePack: {fileID: 4760398223377873903, guid: a79900c9b03246642a0e470e80814bb8, type: 3}
+  myHealths: 20
 --- !u!1 &8671361064038748519
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,19 +6,20 @@ using UnityEngine;
 public class Enemy_script : MonoBehaviour
 {
     private Rigidbody2D _rb;
-
     private Shoot _shootingScript;
 
-	private float _rotate, _rotateSpeed = 50, _plRotate;
+	private float _rotateSpeed = 50;
     private bool _canSetRotate = true;
 
     [SerializeField] private int _speed = 4;
+    [SerializeField] private float _deathZone;
 
-    private Vector2 _directon;
+    private Vector2 _directon, _target;
+    private int _rotate;
 
     public Transform _playerTransform;
 
-    public bool _playerFinded = false, _canSee = true;
+    public bool _playerFinded = false, _canSee = true, SetDeathZone = true;
     
 	IEnumerator SetNewRotate()
 	{
@@ -26,7 +27,7 @@ public class Enemy_script : MonoBehaviour
 
         yield return new WaitForSeconds(5);
 
-        _rotate = UnityEngine.Random.Range(-180, 180);
+        _target = new Vector2(UnityEngine.Random.Range(-70, 50), UnityEngine.Random.Range(-33, 30));
 
         _canSetRotate = true;
 	}
@@ -41,47 +42,66 @@ public class Enemy_script : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_playerTransform.position.x > transform.position.x)
+        _rotate = GetRotateAngle(_target);
+
+        if (_playerFinded && _canSee)
         {
-            _plRotate = -Vector2.Angle(new Vector2(0, 1), new Vector2(_playerTransform.position.x - transform.position.x, _playerTransform.position.y - transform.position.y));
+            _target = _playerTransform.position;
         }
         else
         {
-            _plRotate = Vector2.Angle(new Vector2(0, 1), new Vector2(_playerTransform.position.x - transform.position.x, _playerTransform.position.y - transform.position.y));
-        }
-
-        if (_playerFinded)
-        {
-            if (_canSee)
-            {
-                _rotate = _plRotate;
-            }
-        }
-
-        if (_rotate - _rb.rotation > 1)
-        {
-            _rb.rotation += _rotateSpeed * Time.fixedDeltaTime;
-        }
-        else if (_rotate - _rb.rotation < 0)
-        {
-            _rb.rotation -= _rotateSpeed * Time.fixedDeltaTime;
-        }
-        else
-        {
-            _rb.rotation = _rotate;
-
-            if (_canSetRotate && (!_playerFinded || !_canSee))
+            if (_canSetRotate && _rotate == 0)
             {
                 StartCoroutine(SetNewRotate());
             }
-
+        }
+        
+        if (_rotate != 0)
+        {
+            _rb.rotation += _rotateSpeed * Time.fixedDeltaTime * _rotate;
+        }
+        else
+        {
             if (_playerFinded && _canSee)
             {
                 _shootingScript.Shooting();
             }
 
-            _directon = transform.up;
-            _rb.MovePosition(_rb.position + _directon * _speed * Time.fixedDeltaTime);
+            if (Vector2.Distance(transform.position, _target) >= _deathZone && SetDeathZone)
+            {
+                _directon = transform.up;
+                _rb.MovePosition(_rb.position + _directon * _speed * Time.fixedDeltaTime);
+            }
+            else
+            {
+                _directon = transform.up;
+                _rb.MovePosition(_rb.position + _directon * _speed * Time.fixedDeltaTime);
+            }
         }
+    }
+
+    private int GetRotateAngle(Vector2 target)
+    {
+        float controlAngle;
+
+        controlAngle = Vector2.Angle(transform.right.normalized, new Vector2(target.x - transform.position.x, target.y - transform.position.y).normalized);
+
+        if (controlAngle < 89)
+        {
+            return -1;
+        }
+        else if (controlAngle > 91)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position, _deathZone);
     }
 }
