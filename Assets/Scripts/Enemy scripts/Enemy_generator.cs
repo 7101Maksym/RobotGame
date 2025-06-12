@@ -6,7 +6,9 @@ public class Enemy_generator : MonoBehaviour
 	[SerializeField] private GameObject _enemy;
 	[SerializeField] private Transform _enemyCapacitor;
     [SerializeField] private int _countEnemys = 20;
- 
+
+    public int BeatedEnemys = 0;
+
 	private bool _canAdd = true;
 
 	IEnumerator AddEnemy()

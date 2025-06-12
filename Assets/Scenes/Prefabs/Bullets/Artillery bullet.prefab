@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 940558734629552125}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.992005, w: -0.12619898}
-  m_LocalPosition: {x: 20.839016, y: 36.960953, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.36645484, w: 0.9304359}
+  m_LocalPosition: {x: 1.7584935, y: -3.6223454, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -119,9 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bddd6ed9b505fa94cae15547833eb3bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 2
+  _damage: 5
   _speed: 500
-  _layers: 06000000
+  _layersWithHealths: 06000000
   _excludeLayers: 03000000
   _rb: {fileID: 8678446085367701723}
 --- !u!1 &8010534957863408942

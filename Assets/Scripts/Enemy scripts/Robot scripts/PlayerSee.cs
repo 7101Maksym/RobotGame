@@ -27,15 +27,15 @@ public class PlayerSee : MonoBehaviour
             }
         }
 
-        if (_enemyScript.RechargePackTransform)
+        if (_enemyScript.RestorePackTransform)
         {
-            if (Physics2D.Raycast(transform.position, _enemyScript.RechargePackTransform.transform.position - transform.position, Vector2.Distance(_enemyScript.RechargePackTransform.transform.position, transform.position), _mask))
+            if (Physics2D.Raycast(transform.position, _enemyScript.RestorePackTransform.transform.position - transform.position, Vector2.Distance(_enemyScript.RestorePackTransform.transform.position, transform.position), _mask))
             {
-                _enemyScript.RechargePackCanSee = false;
+                _enemyScript.RestorePackCanSee = false;
             }
             else
             {
-                _enemyScript.RechargePackCanSee = true;
+                _enemyScript.RestorePackCanSee = true;
             }
         }
     }

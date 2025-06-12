@@ -11,10 +11,11 @@ public class PlayerDetect : MonoBehaviour
             _moveScript.PlayerFinded = true;
             _moveScript.PlayerTransform = collision.GetComponentInParent<Rigidbody2D>().transform;
         }
-        else if (collision.gameObject.CompareTag("Recharge"))
+        else if (collision.gameObject.CompareTag("Restore"))
         {
-            _moveScript.RechargePackFinded = true;
-            _moveScript.RechargePackTransform = collision.GetComponentInParent<Rigidbody2D>().transform;
+            _moveScript.RestorePackFinded = true;
+            _moveScript.RestorePackTransform = collision.GetComponentInParent<Rigidbody2D>().transform;
+            _moveScript.SetDeathZone = false;
         }
     }
 
@@ -24,9 +25,10 @@ public class PlayerDetect : MonoBehaviour
         {
             _moveScript.PlayerFinded = false;
         }
-        else if (collision.gameObject.CompareTag("Recharge"))
+        else if (collision.gameObject.CompareTag("Restore"))
         {
-            _moveScript.RechargePackFinded = false;
+            _moveScript.RestorePackFinded = false;
+            _moveScript.SetDeathZone = true;
         }
     }
 }

@@ -7,10 +7,11 @@ public class EnemyDamagedScript : MonoBehaviour
 {
     
     [SerializeField] private int _randParametrs;
-    [SerializeField] private GameObject _rechargePack;
+    [SerializeField] private GameObject _restorePack;
     
-    private Transform _rechargePackCapacitor;
+    private Transform _restorePackCapacitor;
     private SpriteRenderer _renderer;
+    private Enemy_generator _base;
 
     public float maxHealths;
     public float myHealths = 20;
@@ -19,8 +20,9 @@ public class EnemyDamagedScript : MonoBehaviour
 
     private void Awake()
     {
+        _base = GameObject.Find("Enemy_generator").GetComponent<Enemy_generator>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
-        _rechargePackCapacitor = GameObject.Find("RechargeCapacitor").transform;
+        _restorePackCapacitor = GameObject.Find("RestoreCapacitor").transform;
     }
 
     private void Update()
@@ -31,30 +33,32 @@ public class EnemyDamagedScript : MonoBehaviour
 
         if (myHealths <= 0)
         {
+            _base.BeatedEnemys++;
+
             Destroy(gameObject);
 
             if (Random.Range(0, 100) <= _randParametrs)
             {
-                _rechargePack.transform.position = transform.position;
+                _restorePack.transform.position = transform.position;
 
-                Instantiate(_rechargePack, _rechargePackCapacitor);
+                Instantiate(_restorePack, _restorePackCapacitor);
             }
         }
     }
 
-    public void RechargeHealths(int recharge)
+    public void RestoreHealths(int restore)
     {
         if (myHealths == maxHealths)
         {
             return;
         }
-        else if (myHealths + recharge >= maxHealths)
+        else if (myHealths + restore >= maxHealths)
         {
             myHealths = maxHealths;
         }
         else
         {
-            myHealths += recharge;
+            myHealths += restore;
         }
     }
 }

@@ -26,19 +26,19 @@ public class DamagedScript : MonoBehaviour
         }
     }
 
-    public void RechargeHealths(int recharge)
+    public void RestoreHealths(int restore)
     {
         if (myHealths == _maxHealths)
         {
             return;
         }
-        else if (myHealths + recharge >= _maxHealths)
+        else if (myHealths + restore >= _maxHealths)
         {
             myHealths = _maxHealths;
         }
         else
         {
-            myHealths += recharge;
+            myHealths += restore;
         }
     }
 }

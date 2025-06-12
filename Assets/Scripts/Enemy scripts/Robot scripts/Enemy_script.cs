@@ -19,10 +19,10 @@ public class Enemy_script : MonoBehaviour
     private int _rotate;
 
     public Transform PlayerTransform;
-    public Transform RechargePackTransform;
+    public Transform RestorePackTransform;
 
     public bool PlayerFinded = false, CanSee = true, SetDeathZone = true;
-    public bool RechargePackFinded = false, RechargePackCanSee = false;
+    public bool RestorePackFinded = false, RestorePackCanSee = false;
     
 	IEnumerator SetNewRotate()
 	{
@@ -48,9 +48,9 @@ public class Enemy_script : MonoBehaviour
     {
         _rotate = GetRotateAngle(_target);
 
-        if (RechargePackFinded && RechargePackCanSee && _enemyHealths.myHealths < _enemyHealths.maxHealths)
+        if (RestorePackFinded && RestorePackCanSee && _enemyHealths.myHealths < _enemyHealths.maxHealths)
         {
-            _target = RechargePackTransform.position;
+            _target = RestorePackTransform.position;
         }
         else
         {
@@ -73,20 +73,23 @@ public class Enemy_script : MonoBehaviour
         }
         else
         {
-            if (PlayerFinded && CanSee)
+            if (PlayerFinded && CanSee && !(RestorePackCanSee && RestorePackFinded && _enemyHealths.myHealths < _enemyHealths.maxHealths) && _rotate == 0)
             {
                 _shootingScript.Shooting();
             }
 
-            if (Vector2.Distance(transform.position, _target) >= _deathZone && SetDeathZone)
+            if (Vector2.Distance(transform.position, _target) >= _deathZone)
             {
                 _directon = transform.up;
                 _rb.MovePosition(_rb.position + _directon * _speed * Time.fixedDeltaTime);
             }
             else
             {
-                _directon = transform.up;
-                _rb.MovePosition(_rb.position + _directon * _speed * Time.fixedDeltaTime);
+                if (!SetDeathZone)
+                {
+                    _directon = transform.up;
+                    _rb.MovePosition(_rb.position + _directon * _speed * Time.fixedDeltaTime);
+                }
             }
         }
     }

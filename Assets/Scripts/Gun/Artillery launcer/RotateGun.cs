@@ -42,13 +42,16 @@ public class RotateGun : MonoBehaviour
 
 	private void Update()
 	{
-		if (transform.localRotation.eulerAngles.z + 1 > Limit || transform.localRotation.eulerAngles.z - 1 < 0)
+		if (transform.localRotation.eulerAngles.z + 1 > Limit || transform.localRotation.eulerAngles.z - 1 < 0 || _direct != 0)
 		{
 			_shootScript.CanShoot = false;
 		}
 		else
 		{
-			_shootScript.CanShoot = true;
+			if (_direct == 0)
+			{
+				_shootScript.CanShoot = true;
+			}
 		}
 	}
 
@@ -57,6 +60,7 @@ public class RotateGun : MonoBehaviour
 		if (_player.CanMove)
 		{
 			_direct = GetRotateAngle();
+
 			transform.Rotate(new Vector3(0, 0, _rotateSpeed * _direct * Time.fixedDeltaTime));
 		}
     }

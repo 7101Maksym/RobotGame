@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private int _damage = 2;
     [SerializeField] private int _speed = 500;
-    [SerializeField] private int[] _layers, _excludeLayers;
+    [SerializeField] private int[] _layersWithHealths, _excludeLayers;
 
     public Rigidbody2D _rb;
     private Animator _animator;
@@ -64,7 +64,7 @@ public class Bullet : MonoBehaviour
     {
         if (!InArray(_excludeLayers, collision.gameObject.layer) && collision.isTrigger == false)
         {
-            if (InArray(_layers, collision.gameObject.layer))
+            if (InArray(_layersWithHealths, collision.gameObject.layer))
             {
                 if (collision.gameObject.GetComponentInParent<DamagedScript>())
                 {
