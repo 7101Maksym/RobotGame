@@ -7,6 +7,7 @@ public class Enemy_script : MonoBehaviour
 {
     private Rigidbody2D _rb;
     private Shoot _shootingScript;
+    private EnemyDamagedScript _enemyHealths;
 
 	private float _rotateSpeed = 50;
     private bool _canSetRotate = true;
@@ -17,9 +18,11 @@ public class Enemy_script : MonoBehaviour
     private Vector2 _directon, _target;
     private int _rotate;
 
-    public Transform _playerTransform;
+    public Transform PlayerTransform;
+    public Transform RechargePackTransform;
 
-    public bool _playerFinded = false, _canSee = true, SetDeathZone = true;
+    public bool PlayerFinded = false, CanSee = true, SetDeathZone = true;
+    public bool RechargePackFinded = false, RechargePackCanSee = false;
     
 	IEnumerator SetNewRotate()
 	{
@@ -36,6 +39,7 @@ public class Enemy_script : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _shootingScript = GetComponentInChildren<Shoot>();
+        _enemyHealths = GetComponent<EnemyDamagedScript>();
 
         _rotate = UnityEngine.Random.Range(-180, 180);
     }
@@ -44,15 +48,22 @@ public class Enemy_script : MonoBehaviour
     {
         _rotate = GetRotateAngle(_target);
 
-        if (_playerFinded && _canSee)
+        if (RechargePackFinded && RechargePackCanSee && _enemyHealths.myHealths < _enemyHealths.maxHealths)
         {
-            _target = _playerTransform.position;
+            _target = RechargePackTransform.position;
         }
         else
         {
-            if (_canSetRotate && _rotate == 0)
+            if (PlayerFinded && CanSee)
             {
-                StartCoroutine(SetNewRotate());
+                _target = PlayerTransform.position;
+            }
+            else
+            {
+                if (_canSetRotate && _rotate == 0)
+                {
+                    StartCoroutine(SetNewRotate());
+                }
             }
         }
         
@@ -62,7 +73,7 @@ public class Enemy_script : MonoBehaviour
         }
         else
         {
-            if (_playerFinded && _canSee)
+            if (PlayerFinded && CanSee)
             {
                 _shootingScript.Shooting();
             }

@@ -5,13 +5,14 @@ using UnityEngine;
 
 public class EnemyDamagedScript : MonoBehaviour
 {
-    [SerializeField] private float _maxHealths;
+    
     [SerializeField] private int _randParametrs;
     [SerializeField] private GameObject _rechargePack;
     
     private Transform _rechargePackCapacitor;
     private SpriteRenderer _renderer;
 
+    public float maxHealths;
     public float myHealths = 20;
 
     private float _delta;
@@ -24,7 +25,7 @@ public class EnemyDamagedScript : MonoBehaviour
 
     private void Update()
     {
-        _delta = (((_maxHealths - myHealths) * 155f) / (_maxHealths - 1f)) / 255f;
+        _delta = (((maxHealths - myHealths) * 155f) / (maxHealths - 1f)) / 255f;
 
         _renderer.color = new Color(1f - _delta, 1f - _delta, 1f - _delta);
 
@@ -43,13 +44,13 @@ public class EnemyDamagedScript : MonoBehaviour
 
     public void RechargeHealths(int recharge)
     {
-        if (myHealths == _maxHealths)
+        if (myHealths == maxHealths)
         {
             return;
         }
-        else if (myHealths + recharge >= _maxHealths)
+        else if (myHealths + recharge >= maxHealths)
         {
-            myHealths = _maxHealths;
+            myHealths = maxHealths;
         }
         else
         {

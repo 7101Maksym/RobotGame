@@ -4,25 +4,39 @@ using UnityEngine.UI;
 
 public class PlayerSee : MonoBehaviour
 {
-    [SerializeField] private Enemy_script _moveScript;
     [SerializeField] private LayerMask _mask;
 
-    private GameObject _player;
+    private Enemy_script _enemyScript;
 
     private void Awake()
     {
-        _player = GameObject.Find("Player");
+        _enemyScript = GetComponent<Enemy_script>();
     }
 
     private void FixedUpdate()
     {
-        if (Physics2D.Raycast(transform.position, _player.transform.position - transform.position, Vector2.Distance(_player.transform.position, transform.position), _mask))
+        if (_enemyScript.PlayerTransform)
         {
-            _moveScript._canSee = false;
+            if (Physics2D.Raycast(transform.position, _enemyScript.PlayerTransform.transform.position - transform.position, Vector2.Distance(_enemyScript.PlayerTransform.transform.position, transform.position), _mask))
+            {
+                _enemyScript.CanSee = false;
+            }
+            else
+            {
+                _enemyScript.CanSee = true;
+            }
         }
-        else
+
+        if (_enemyScript.RechargePackTransform)
         {
-            _moveScript._canSee = true;
+            if (Physics2D.Raycast(transform.position, _enemyScript.RechargePackTransform.transform.position - transform.position, Vector2.Distance(_enemyScript.RechargePackTransform.transform.position, transform.position), _mask))
+            {
+                _enemyScript.RechargePackCanSee = false;
+            }
+            else
+            {
+                _enemyScript.RechargePackCanSee = true;
+            }
         }
     }
 }
