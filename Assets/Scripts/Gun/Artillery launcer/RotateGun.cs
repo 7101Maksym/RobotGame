@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 public class RotateGun : MonoBehaviour
@@ -8,6 +9,7 @@ public class RotateGun : MonoBehaviour
 
 	private ArtilleryLauncerShoot _shootScript;
 	private PlayerMove _player;
+	private Camera _camera;
 
 	private int _direct;
 
@@ -16,11 +18,12 @@ public class RotateGun : MonoBehaviour
 		Limit = gameObject.GetComponentInParent<SelectGun>().Limit;
         _shootScript = GetComponent<ArtilleryLauncerShoot>();
         _player = GameObject.Find("Player").GetComponent<PlayerMove>();
+		_camera = GameObject.Find("Camera").GetComponent<Camera>();
     }
 
     private int GetRotateAngle()
 	{
-		Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		Vector2 mouse = _camera.ScreenToWorldPoint(Input.mousePosition);
 
         float controlAngle;
 

@@ -1,22 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RestorePack : MonoBehaviour
 {
     public int _restore;
-
-    private GameObject _player;
-
-    private void Awake()
-    {
-        _player = GameObject.Find("Player");
-    }
-
-    private void FixedUpdate()
-    {
-        transform.rotation = _player.transform.rotation;
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

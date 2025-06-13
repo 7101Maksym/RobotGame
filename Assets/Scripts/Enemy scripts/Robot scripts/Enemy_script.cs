@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using TreeEditor;
 using UnityEngine;
 
 public class Enemy_script : MonoBehaviour
@@ -14,6 +13,7 @@ public class Enemy_script : MonoBehaviour
 
     [SerializeField] private int _speed = 4;
     [SerializeField] private float _deathZone;
+    [SerializeField] private LayerMask _mask;
 
     private Vector2 _directon, _target;
     private int _rotate;
@@ -66,16 +66,19 @@ public class Enemy_script : MonoBehaviour
                 }
             }
         }
-        
+
         if (_rotate != 0)
         {
             _rb.rotation += _rotateSpeed * Time.fixedDeltaTime * _rotate;
         }
         else
         {
-            if (PlayerFinded && CanSee && !(RestorePackCanSee && RestorePackFinded && _enemyHealths.myHealths < _enemyHealths.maxHealths) && _rotate == 0)
+            if (PlayerFinded && CanSee && !(RestorePackCanSee && RestorePackFinded && _enemyHealths.myHealths < _enemyHealths.maxHealths))
             {
-                _shootingScript.Shooting();
+                if (Physics2D.Raycast(transform.position, transform.up, Vector2.Distance(transform.position, PlayerTransform.position), _mask))
+                {
+                    _shootingScript.Shooting();
+                }
             }
 
             if (Vector2.Distance(transform.position, _target) >= _deathZone)

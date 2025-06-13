@@ -4,12 +4,22 @@ using UnityEngine.UI;
 public class SelectGun : MonoBehaviour
 {
 	[SerializeField] public GameObject Gun;
-    [SerializeField] private Image _image;
-
+    
     [Range(0, 360)]
     [SerializeField] public float Limit;
     [Range(0, 360)]
     [SerializeField] public float StartDirection;
+    
+    private Image _image;
+
+    private char _id;
+
+    private void Awake()
+    {
+        _id = transform.name[transform.name.Length - 1];
+
+        _image = GameObject.Find("Canvas").transform.Find("SettingButtons").transform.Find("Button " + _id).GetComponent<Image>();
+    }
 
     public void AddGun()
     {
